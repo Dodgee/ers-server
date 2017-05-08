@@ -9,8 +9,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class ServerApplicationTests {
 
+	/**
+	 * Tests Spring Beans are configured correctly. Will fail if Spring fails to load beans into it's context.
+	 */
 	@Test
 	public void contextLoads() {
+
 	}
 
 }
