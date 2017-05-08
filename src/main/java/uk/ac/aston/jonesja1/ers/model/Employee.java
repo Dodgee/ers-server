@@ -1,10 +1,13 @@
 package uk.ac.aston.jonesja1.ers.model;
 
+import org.springframework.data.annotation.Id;
+
 public class Employee {
 
     /**
      * ID given to an Employee by to company.
      */
+    @Id
     private Integer id;
 
     /**

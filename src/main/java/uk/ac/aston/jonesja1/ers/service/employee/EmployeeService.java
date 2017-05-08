@@ -11,4 +11,6 @@ public interface EmployeeService {
      * @param employee the employee who is enrolling.
      */
     Employee enroll(Employee employee);
+
+    Employee find(Integer id);
 }
