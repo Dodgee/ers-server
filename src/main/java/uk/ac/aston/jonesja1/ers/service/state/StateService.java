@@ -2,22 +2,23 @@ package uk.ac.aston.jonesja1.ers.service.state;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import uk.ac.aston.jonesja1.ers.model.SystemState;
+import uk.ac.aston.jonesja1.ers.service.EmployeeRiskService;
 
 @Service
 public class StateService {
 
     Logger logger = LoggerFactory.getLogger(StateService.class);
 
-    private final RestTemplate restTemplate;
+    @Autowired
+    private EmployeeRiskService employeeRiskService;
 
     private SystemState currentState;
 
     public StateService(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplate = restTemplateBuilder.build();
         currentState = SystemState.CALM;
     }
 
@@ -33,10 +34,14 @@ public class StateService {
         //TODO implement actually updating devices
         switch (systemState) {
             case CALM:
-                logger.info("CALM MODE ACTIVATED: NOTIFY DEVICES ENTERED CALM MODE");
+                logger.info("--- CALM MODE ACTIVATED ---");
+                logger.info("NOTIFYING DEVICES ENTERED CALM MODE");
+                //TODO notify devices
                 break;
             case EMERGENCY:
-                logger.info("EMERGENCY MODE ACTIVATED: NOTIFY DEVICES ENTERED EMERGENCY MODE");
+                logger.info("--- EMERGENCY MODE ACTIVATED ---");
+                logger.info("NOTIFYING DEVICES ENTERED EMERGENCY MODE");
+                //TODO notify devices
                 break;
         }
         currentState = systemState;
