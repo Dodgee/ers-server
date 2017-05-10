@@ -13,12 +13,9 @@ public class StateService {
 
     Logger logger = LoggerFactory.getLogger(StateService.class);
 
-    @Autowired
-    private EmployeeRiskService employeeRiskService;
-
     private SystemState currentState;
 
-    public StateService(RestTemplateBuilder restTemplateBuilder) {
+    public StateService() {
         currentState = SystemState.CALM;
     }
 
