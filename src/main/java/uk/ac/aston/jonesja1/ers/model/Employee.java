@@ -2,13 +2,18 @@ package uk.ac.aston.jonesja1.ers.model;
 
 import org.springframework.data.annotation.Id;
 
+import java.math.BigInteger;
+
 public class Employee {
+
+
+    @Id
+    private String id;
 
     /**
      * ID given to an Employee by the company.
      */
-    @Id
-    private Integer id;
+    private Integer employeeId;
 
     /**
      * Employee's name.
@@ -24,12 +29,20 @@ public class Employee {
 
     private String connectionDetails;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getName() {

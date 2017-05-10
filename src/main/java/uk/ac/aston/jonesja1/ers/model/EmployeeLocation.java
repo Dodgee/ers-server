@@ -1,10 +1,7 @@
 package uk.ac.aston.jonesja1.ers.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.Id;
 
-import java.time.LocalDate;
 
 /**
  * An update from an employees device.
@@ -14,28 +11,28 @@ import java.time.LocalDate;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EmployeeLocation {
 
-    @Id
-    private String id;
-
-    private Integer employeeID;
+    /**
+     * Same as Employee.id
+     */
+    private String employeeId;
 
     private Location location;
 
-    private LocalDate dateCreated;
-
-    @JsonCreator
-    public EmployeeLocation(Integer employeeID, Location location) {
-        this.employeeID = employeeID;
+    public EmployeeLocation(String employeeID, Location location) {
+        this.employeeId = employeeID;
         this.location = location;
-        dateCreated = LocalDate.now();
     }
 
-    public Integer getEmployeeID() {
-        return employeeID;
+    public EmployeeLocation() {
+
     }
 
-    public void setEmployeeID(Integer employeeID) {
-        this.employeeID = employeeID;
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeID) {
+        this.employeeId = employeeID;
     }
 
     public Location getLocation() {

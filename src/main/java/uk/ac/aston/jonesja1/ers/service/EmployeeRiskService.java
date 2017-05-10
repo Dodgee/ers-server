@@ -41,7 +41,7 @@ public class EmployeeRiskService {
 
     public void calculateEmployeeRiskLevel(EmployeeLocation updatedEmployeeLocation) {
         EmployeeRiskLevel employeeRiskLevel = new EmployeeRiskLevel();
-        employeeRiskLevel.setEmployeeId(updatedEmployeeLocation.getEmployeeID());
+        employeeRiskLevel.setId(updatedEmployeeLocation.getEmployeeId());
         employeeRiskLevel.setDateCreated(LocalDateTime.now());
         employeeRiskLevel.setDistance(BigDecimal.TEN);
         employeeRiskLevel.setRiskLevel(RiskLevel.LOW);

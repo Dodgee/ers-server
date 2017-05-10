@@ -1,7 +1,6 @@
 package uk.ac.aston.jonesja1.ers.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -9,8 +8,7 @@ import java.time.LocalDateTime;
 public class EmployeeRiskLevel {
 
     @Id
-    @Field("id")
-    private Integer employeeId;
+    private String id;
 
     private Employee employee;
 
@@ -20,12 +18,12 @@ public class EmployeeRiskLevel {
 
     private LocalDateTime dateCreated;
 
-    public Integer getEmployeeId() {
-        return employeeId;
+    public String getId() {
+        return id;
     }
 
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Employee getEmployee() {
