@@ -2,6 +2,8 @@ package uk.ac.aston.jonesja1.ers.model;
 
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.NotNull;
+
 public class Employee {
 
 
@@ -11,16 +13,19 @@ public class Employee {
     /**
      * ID given to an Employee by the company.
      */
+    @NotNull
     private Integer employeeId;
 
     /**
      * Employee's name.
      */
+    @NotNull
     private String name;
 
     /**
      * Company email address of the employee.
      */
+    @NotNull
     private String emailAddress;
 
     private DeviceType deviceType;

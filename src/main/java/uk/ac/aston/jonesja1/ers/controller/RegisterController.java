@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.ac.aston.jonesja1.ers.model.Employee;
 import uk.ac.aston.jonesja1.ers.service.employee.EmployeeService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/register")
 public class RegisterController {
@@ -23,8 +25,8 @@ public class RegisterController {
     private EmployeeService employeeService;
 
     @RequestMapping(method = RequestMethod.PUT, value = "/", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity register(@RequestBody final Employee employee) {
-        logger.info("Register Request Received: {}", employee.toString());
+    public ResponseEntity register(@Valid @RequestBody final Employee employee) {
+        logger.info("Register Request Received: {}", employee.getEmployeeId());
         Employee enrolled = employeeService.enroll(employee);
         if (enrolled == null) {
             return new ResponseEntity<>("Failed to Register User.", HttpStatus.BAD_REQUEST);
