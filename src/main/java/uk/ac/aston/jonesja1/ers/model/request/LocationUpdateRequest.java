@@ -1,29 +1,24 @@
-package uk.ac.aston.jonesja1.ers.model;
+package uk.ac.aston.jonesja1.ers.model.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import uk.ac.aston.jonesja1.ers.model.Location;
 
-
-/**
- * An update from an employees device.
- * Contains information on who the update is for and the
- * location details.
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EmployeeLocation {
+public class LocationUpdateRequest {
 
     /**
-     * Same as Employee.id
+     * same as employee.id
      */
     private String employeeId;
 
     private Location location;
 
-    public EmployeeLocation(String employeeID, Location location) {
+    public LocationUpdateRequest(String employeeID, Location location) {
         this.employeeId = employeeID;
         this.location = location;
     }
 
-    public EmployeeLocation() {
+    public LocationUpdateRequest() {
 
     }
 
@@ -42,4 +37,5 @@ public class EmployeeLocation {
     public void setLocation(Location location) {
         this.location = location;
     }
+
 }

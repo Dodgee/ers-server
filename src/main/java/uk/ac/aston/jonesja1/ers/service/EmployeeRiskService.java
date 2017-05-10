@@ -38,17 +38,17 @@ public class EmployeeRiskService {
         return lowRiskLevels;
     }
 
-    public void calculateEmployeeRiskLevel(EmployeeLocation updatedEmployeeLocation) {
-        EmployeeRiskLevel employeeRiskLevel = calculateRiskLevel(Coordinates.ASTON_UNIVERSITY_MAIN_BUILDING, updatedEmployeeLocation.getLocation());
-        employeeRiskLevel.setId(updatedEmployeeLocation.getEmployeeId());
+    public void calculateEmployeeRiskLevel(LocationUpdate locationUpdate) {
+        EmployeeRiskLevel employeeRiskLevel = calculateRiskLevel(Coordinates.ASTON_UNIVERSITY_MAIN_BUILDING, locationUpdate.getLocation());
+        employeeRiskLevel.setEmployee(locationUpdate.getEmployee());
         //TODO get current site instead of defaulting to Aston Main Building
         employeeRiskLevelRepository.save(employeeRiskLevel);
     }
 
-    private EmployeeRiskLevel calculateRiskLevel(Location event, Location point) {
+    private EmployeeRiskLevel calculateRiskLevel(Location eventLocation, Location employeeLocation) {
         GeodeticCalculator calculator = new GeodeticCalculator();
-        calculator.setStartingGeographicPoint(event.getLongitude().doubleValue(), event.getLatitude().doubleValue());
-        calculator.setDestinationGeographicPoint(point.getLongitude().doubleValue(), point.getLatitude().doubleValue());
+        calculator.setStartingGeographicPoint(eventLocation.getLongitude().doubleValue(), eventLocation.getLatitude().doubleValue());
+        calculator.setDestinationGeographicPoint(employeeLocation.getLongitude().doubleValue(), employeeLocation.getLatitude().doubleValue());
         double displacement = calculator.getOrthodromicDistance();
 
         EmployeeRiskLevel riskLevel = new EmployeeRiskLevel();

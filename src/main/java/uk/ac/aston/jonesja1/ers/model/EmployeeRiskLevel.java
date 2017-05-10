@@ -31,6 +31,7 @@ public class EmployeeRiskLevel {
     }
 
     public void setEmployee(Employee employee) {
+        this.id = employee.getId();
         this.employee = employee;
     }
 

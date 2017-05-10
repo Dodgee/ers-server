@@ -12,5 +12,5 @@ public interface EmployeeService {
      */
     Employee enroll(Employee employee);
 
-    Employee find(Integer id);
+    Employee find(String id);
 }

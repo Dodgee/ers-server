@@ -19,7 +19,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
-    public Employee find(Integer id) {
+    public Employee find(String id) {
         return employeeRepository.findOne(id);
     }
 
