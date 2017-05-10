@@ -1,11 +1,10 @@
 package uk.ac.aston.jonesja1.ers.service;
 
+import org.geotools.referencing.GeodeticCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.ac.aston.jonesja1.ers.model.EmployeeLocation;
-import uk.ac.aston.jonesja1.ers.model.EmployeeRiskLevel;
-import uk.ac.aston.jonesja1.ers.model.EmployeeRiskLevels;
-import uk.ac.aston.jonesja1.ers.model.RiskLevel;
+import uk.ac.aston.jonesja1.ers.constants.Coordinates;
+import uk.ac.aston.jonesja1.ers.model.*;
 import uk.ac.aston.jonesja1.ers.repository.EmployeeRiskLevelRepository;
 
 import java.math.BigDecimal;
@@ -40,15 +39,30 @@ public class EmployeeRiskService {
     }
 
     public void calculateEmployeeRiskLevel(EmployeeLocation updatedEmployeeLocation) {
-        EmployeeRiskLevel employeeRiskLevel = new EmployeeRiskLevel();
+        EmployeeRiskLevel employeeRiskLevel = calculateRiskLevel(Coordinates.ASTON_UNIVERSITY_MAIN_BUILDING, updatedEmployeeLocation.getLocation());
         employeeRiskLevel.setId(updatedEmployeeLocation.getEmployeeId());
-        employeeRiskLevel.setDateCreated(LocalDateTime.now());
-        employeeRiskLevel.setDistance(BigDecimal.TEN);
-        employeeRiskLevel.setRiskLevel(RiskLevel.LOW);
-        //TODO do...
-        //get current site
-        //work out distance from employee
-        //set appropriate risk
+        //TODO get current site instead of defaulting to Aston Main Building
         employeeRiskLevelRepository.save(employeeRiskLevel);
+    }
+
+    private EmployeeRiskLevel calculateRiskLevel(Location event, Location point) {
+        GeodeticCalculator calculator = new GeodeticCalculator();
+        calculator.setStartingGeographicPoint(event.getLongitude().doubleValue(), event.getLatitude().doubleValue());
+        calculator.setDestinationGeographicPoint(point.getLongitude().doubleValue(), point.getLatitude().doubleValue());
+        double displacement = calculator.getOrthodromicDistance();
+
+        EmployeeRiskLevel riskLevel = new EmployeeRiskLevel();
+        riskLevel.setDistance(BigDecimal.valueOf(displacement));
+        riskLevel.setDateCreated(LocalDateTime.now());
+        riskLevel.setRiskLevel(generateRiskLevel(displacement));
+        return riskLevel;
+    }
+
+    private RiskLevel generateRiskLevel(double distance) {
+        //TODO extract 250 into config or store locations in the database?
+        if (distance < 250) {
+            return RiskLevel.HIGH;
+        }
+        return RiskLevel.LOW;
     }
 }

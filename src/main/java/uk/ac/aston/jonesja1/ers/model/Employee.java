@@ -2,8 +2,6 @@ package uk.ac.aston.jonesja1.ers.model;
 
 import org.springframework.data.annotation.Id;
 
-import java.math.BigInteger;
-
 public class Employee {
 
 
