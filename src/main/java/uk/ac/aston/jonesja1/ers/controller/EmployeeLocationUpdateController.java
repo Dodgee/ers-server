@@ -12,6 +12,8 @@ import uk.ac.aston.jonesja1.ers.model.request.LocationUpdateRequest;
 import uk.ac.aston.jonesja1.ers.service.EmployeeRiskService;
 import uk.ac.aston.jonesja1.ers.service.employee.EmployeeService;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/update")
@@ -26,7 +28,7 @@ public class EmployeeLocationUpdateController {
     private EmployeeService employeeService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void update(@RequestBody LocationUpdateRequest locationUpdateRequest) {
+    public void update(@Valid @RequestBody LocationUpdateRequest locationUpdateRequest) {
         logger.debug("Received Update Request for Employee {}", locationUpdateRequest.getEmployeeId());
         Employee employee = employeeService.find(locationUpdateRequest.getEmployeeId());
         if (employee == null) {

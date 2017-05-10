@@ -1,5 +1,6 @@
 package uk.ac.aston.jonesja1.ers.model;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -7,8 +8,10 @@ import java.math.BigDecimal;
  */
 public class Location {
 
+    @NotNull
     private BigDecimal longitude;
 
+    @NotNull
     private BigDecimal latitude;
 
     public Location(BigDecimal longitude, BigDecimal latitude) {
