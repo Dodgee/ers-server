@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 public class Employee {
 
     /**
-     * ID given to an Employee by to company.
+     * ID given to an Employee by the company.
      */
     @Id
     private Integer id;
