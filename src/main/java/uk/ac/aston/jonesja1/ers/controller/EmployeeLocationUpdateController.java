@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.aston.jonesja1.ers.model.Employee;
+import uk.ac.aston.jonesja1.ers.model.Location;
 import uk.ac.aston.jonesja1.ers.model.LocationUpdate;
 import uk.ac.aston.jonesja1.ers.model.request.LocationUpdateRequest;
 import uk.ac.aston.jonesja1.ers.service.EmployeeRiskService;
 import uk.ac.aston.jonesja1.ers.service.employee.EmployeeService;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 
 
 @RestController
@@ -29,14 +31,20 @@ public class EmployeeLocationUpdateController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void update(@Valid @RequestBody LocationUpdateRequest locationUpdateRequest) {
-        logger.debug("Received Update Request for Employee {}", locationUpdateRequest.getEmployeeId());
-        Employee employee = employeeService.find(locationUpdateRequest.getEmployeeId());
+        logger.debug("Received Update Request for Employee {}", locationUpdateRequest.getId());
+        Employee employee = employeeService.find(locationUpdateRequest.getId());
         if (employee == null) {
-            logger.error("Employee {} is not enrolled to use this system.", locationUpdateRequest.getEmployeeId());
+            logger.error("Employee {} is not enrolled to use this system.", locationUpdateRequest.getId());
         } else {
-            LocationUpdate locationUpdate = new LocationUpdate(employee, locationUpdateRequest.getLocation());
+            LocationUpdate locationUpdate = new LocationUpdate(
+                    employee,
+                    new Location(
+                            BigDecimal.valueOf(locationUpdateRequest.getLongitude()),
+                            BigDecimal.valueOf(locationUpdateRequest.getLatitude())
+                    )
+            );
             employeeRiskService.calculateEmployeeRiskLevel(locationUpdate);
-            logger.debug("Processed Update Request for Employee {}", locationUpdateRequest.getEmployeeId());
+            logger.debug("Processed Update Request for Employee {}", locationUpdateRequest.getId());
         }
     }
 

@@ -1,9 +1,6 @@
 package uk.ac.aston.jonesja1.ers.model.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import uk.ac.aston.jonesja1.ers.model.Location;
-
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -13,35 +10,45 @@ public class LocationUpdateRequest {
      * same as employee.id
      */
     @NotNull
-    private String employeeId;
+    private String id;
 
     @NotNull
-    @Valid
-    private Location location;
+    private double longitude;
 
-    public LocationUpdateRequest(String employeeID, Location location) {
-        this.employeeId = employeeID;
-        this.location = location;
+    @NotNull
+    private double latitude;
+
+    public LocationUpdateRequest(String id, double longitude, double latitude) {
+        this.id = id;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public LocationUpdateRequest() {
 
     }
 
-    public String getEmployeeId() {
-        return employeeId;
+    public String getId() {
+        return id;
     }
 
-    public void setEmployeeId(String employeeID) {
-        this.employeeId = employeeID;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Location getLocation() {
-        return location;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
 }
