@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.ac.aston.jonesja1.ers.model.Employee;
 import uk.ac.aston.jonesja1.ers.service.employee.EmployeeService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -20,4 +22,10 @@ public class EmployeeController {
         return employeeService.find(id);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/")
+    public List<Employee> all() {
+        return employeeService.all();
+    }
+
 }
+

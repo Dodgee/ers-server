@@ -2,11 +2,8 @@ package uk.ac.aston.jonesja1.ers.service.state;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import uk.ac.aston.jonesja1.ers.model.SystemState;
-import uk.ac.aston.jonesja1.ers.service.EmployeeRiskService;
 
 @Service
 public class StateService {

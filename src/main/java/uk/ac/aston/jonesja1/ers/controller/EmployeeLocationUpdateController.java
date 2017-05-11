@@ -39,4 +39,5 @@ public class EmployeeLocationUpdateController {
             logger.debug("Processed Update Request for Employee {}", locationUpdateRequest.getEmployeeId());
         }
     }
+
 }

@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uk.ac.aston.jonesja1.ers.model.Employee;
 import uk.ac.aston.jonesja1.ers.service.employee.EmployeeService;
 
@@ -31,7 +28,7 @@ public class RegisterController {
         if (enrolled == null) {
             return new ResponseEntity<>("Failed to Register User.", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(enrolled, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("Successfully Enrolled.", HttpStatus.CREATED);
     }
 
 }

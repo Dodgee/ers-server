@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import uk.ac.aston.jonesja1.ers.model.Employee;
 import uk.ac.aston.jonesja1.ers.repository.EmployeeRepository;
 
+import java.util.List;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -21,6 +23,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public Employee find(String id) {
         return employeeRepository.findOne(id);
+    }
+
+    @Override
+    public List<Employee> all() {
+        return employeeRepository.findAll();
     }
 
 }

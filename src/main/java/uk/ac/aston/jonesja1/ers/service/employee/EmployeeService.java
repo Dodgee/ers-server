@@ -3,6 +3,8 @@ package uk.ac.aston.jonesja1.ers.service.employee;
 import org.springframework.stereotype.Service;
 import uk.ac.aston.jonesja1.ers.model.Employee;
 
+import java.util.List;
+
 @Service
 public interface EmployeeService {
 
@@ -13,4 +15,6 @@ public interface EmployeeService {
     Employee enroll(Employee employee);
 
     Employee find(String id);
+
+    List<Employee> all();
 }
