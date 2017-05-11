@@ -26,9 +26,23 @@ public class RegisterController {
         logger.info("Register Request Received: {}", employee.getEmployeeId());
         Employee enrolled = employeeService.enroll(employee);
         if (enrolled == null) {
-            return new ResponseEntity<>("Failed to Register User.", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("Successfully Enrolled.", HttpStatus.CREATED);
+        return new ResponseEntity<>(enrolled.getId(), HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/reauthenticate/{id}")
+    public ResponseEntity reauthenticate(
+            @Valid @RequestBody final String token,
+            @PathVariable String id) {
+        logger.info("ReAuth Request Received: {}", id);
+        Employee enrolled = employeeService.find(id);
+        if (enrolled != null) {
+            enrolled.setConnectionDetails(token);
+            employeeService.save(enrolled);
+            return new ResponseEntity<>("Failed to Register User.", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Employee is not enrolled. Please enrol again.", HttpStatus.NOT_FOUND);
     }
 
 }

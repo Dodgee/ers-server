@@ -17,4 +17,6 @@ public interface EmployeeService {
     Employee find(String id);
 
     List<Employee> all();
+
+    Employee save(Employee employee);
 }
