@@ -8,6 +8,8 @@ import de.bytefish.fcmjava.requests.notification.NotificationPayload;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class DeviceNotificationService {
@@ -29,12 +31,13 @@ public class DeviceNotificationService {
                 .setTimeToLive(Duration.ofSeconds(15))
                 .build();
 
-        NotificationPayload payload = NotificationPayload.builder()
+        /*NotificationPayload payload = NotificationPayload.builder()
                 .setBody("Test Message 1")
                 .setTag("Test")
                 .setTitle("Test")
-                .build();
-
-        client.send(new DataUnicastMessage(options, deviceToken, null, payload));
+                .build();*/
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("STATUS", "EMERGENCY");
+        client.send(new DataUnicastMessage(options, deviceToken, data, null));
     }
 }
