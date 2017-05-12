@@ -3,7 +3,7 @@ package uk.ac.aston.jonesja1.ers.service;
 import org.geotools.referencing.GeodeticCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.ac.aston.jonesja1.ers.constants.Coordinates;
+import uk.ac.aston.jonesja1.ers.constants.Sites;
 import uk.ac.aston.jonesja1.ers.model.*;
 import uk.ac.aston.jonesja1.ers.repository.EmployeeRiskLevelRepository;
 
@@ -39,7 +39,7 @@ public class EmployeeRiskService {
     }
 
     public void calculateEmployeeRiskLevel(LocationUpdate locationUpdate) {
-        EmployeeRiskLevel employeeRiskLevel = calculateRiskLevel(Coordinates.ASTON_UNIVERSITY_MAIN_BUILDING, locationUpdate.getLocation());
+        EmployeeRiskLevel employeeRiskLevel = calculateRiskLevel(Sites.ASTON_UNIVERSITY_MAIN_BUILDING_LOCATION, locationUpdate.getLocation());
         employeeRiskLevel.setEmployee(locationUpdate.getEmployee());
         //TODO get current site instead of defaulting to Aston Main Building
         employeeRiskLevelRepository.save(employeeRiskLevel);

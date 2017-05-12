@@ -4,8 +4,9 @@ import de.bytefish.fcmjava.client.FcmClient;
 import de.bytefish.fcmjava.http.options.IFcmClientSettings;
 import de.bytefish.fcmjava.model.options.FcmMessageOptions;
 import de.bytefish.fcmjava.requests.data.DataUnicastMessage;
-import de.bytefish.fcmjava.requests.notification.NotificationPayload;
 import org.springframework.stereotype.Service;
+import uk.ac.aston.jonesja1.ers.model.request.NotificationRequest;
+import uk.ac.aston.jonesja1.ers.model.request.SingleNotificationRequest;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import java.util.Map;
 @Service
 public class DeviceNotificationService {
 
-    public void notifyDevice(String deviceToken) {
+    public void notifyDevice(SingleNotificationRequest notificationRequest) {
         FcmClient client = new FcmClient(new IFcmClientSettings() {
             @Override
             public String getFcmUrl() {
@@ -31,13 +32,13 @@ public class DeviceNotificationService {
                 .setTimeToLive(Duration.ofSeconds(15))
                 .build();
 
-        /*NotificationPayload payload = NotificationPayload.builder()
-                .setBody("Test Message 1")
-                .setTag("Test")
-                .setTitle("Test")
-                .build();*/
         Map<String, String> data = new HashMap<String, String>();
-        data.put("STATUS", "EMERGENCY");
-        client.send(new DataUnicastMessage(options, deviceToken, data, null));
+        data.put("STATUS", notificationRequest.getState().toString());
+        data.put("SITE", notificationRequest.getSite().toString());
+        client.send(new DataUnicastMessage(options, notificationRequest.getConnectionToken(), data, null));
+    }
+
+    public void notifyAll(NotificationRequest notificationRequest) {
+        //no op
     }
 }
