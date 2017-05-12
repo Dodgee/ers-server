@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Service
 public class DeviceNotificationService {
-
+    //TODO refactor FCMClient code
     public void notifyDevice(SingleNotificationRequest notificationRequest) {
         FcmClient client = new FcmClient(new IFcmClientSettings() {
             @Override
