@@ -1,7 +1,10 @@
 'use strict';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
+
+import Home from './Home.js'
 
 class App extends React.Component {
 
@@ -14,7 +17,11 @@ class App extends React.Component {
     }
 
     render() {
-        return (<h1>Hello, World!</h1>)
+        return (
+            <BrowserRouter>
+                <Route path="/" component={Home}/>
+            </BrowserRouter>
+        )
     }
 }
 
