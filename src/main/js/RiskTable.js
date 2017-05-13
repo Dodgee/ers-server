@@ -16,17 +16,19 @@ class RiskTable extends React.Component {
     }
 
     render() {
-        var employeeRisks = this.props.employeeRisks.map(employee =>
-            <EmployeeRisk key={employee._links.self.href} employee={employee} />
+        var employeeRisks = this.props.employeeRisks.map(risk =>
+            <EmployeeRisk risk={risk} />
         );
 
         return (
             <Table striped bordered condensed hover>
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Name</th>
                         <th>Employee Number</th>
+                        <th>Email</th>
+                        <th>Risk Level</th>
+                        <th>Distance</th>
                     </tr>
                 </thead>
                 <tbody>

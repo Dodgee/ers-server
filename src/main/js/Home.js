@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react'
+import axios  from 'axios'
 
 import RiskTable from './RiskTable.js'
 
@@ -14,7 +15,14 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+        this.getEmployeeRisks();
+    }
 
+    getEmployeeRisks() {
+        axios.get('http://localhost:8080/risk/')
+            .then(response => {
+                this.setState({ employeeRisks: response.data.employeeRiskLevels });
+            });
     }
 
     render() {

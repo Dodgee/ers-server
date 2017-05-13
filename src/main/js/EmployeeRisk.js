@@ -16,8 +16,11 @@ class EmployeeRisk extends React.Component {
 
         return (
             <tr>
-                <th>{this.props.employee.name}</th>
-                <th>{this.props.employee.employeeNumber}</th>
+                <th>{this.props.risk.employee.name}</th>
+                <th>{this.props.risk.employee.employeeId}</th>
+                <th>{this.props.risk.employee.emailAddress}</th>
+                <th>{this.props.risk.riskLevel}</th>
+                <th>{this.props.risk.distance}</th>
             </tr>
         )
     }
