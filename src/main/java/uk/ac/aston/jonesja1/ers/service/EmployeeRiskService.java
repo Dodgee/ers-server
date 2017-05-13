@@ -3,9 +3,9 @@ package uk.ac.aston.jonesja1.ers.service;
 import org.geotools.referencing.GeodeticCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.ac.aston.jonesja1.ers.constants.Sites;
 import uk.ac.aston.jonesja1.ers.model.*;
 import uk.ac.aston.jonesja1.ers.repository.EmployeeRiskLevelRepository;
+import uk.ac.aston.jonesja1.ers.service.state.StateService;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,6 +16,9 @@ public class EmployeeRiskService {
 
     @Autowired
     private EmployeeRiskLevelRepository employeeRiskLevelRepository;
+
+    @Autowired
+    private StateService stateService;
 
     public EmployeeRiskLevels getAllEmployeeRiskLevels() {
         List<EmployeeRiskLevel> riskLevels = employeeRiskLevelRepository.findAll();
@@ -39,10 +42,12 @@ public class EmployeeRiskService {
     }
 
     public void calculateEmployeeRiskLevel(LocationUpdate locationUpdate) {
-        EmployeeRiskLevel employeeRiskLevel = calculateRiskLevel(Sites.ASTON_UNIVERSITY_MAIN_BUILDING_LOCATION, locationUpdate.getLocation());
-        employeeRiskLevel.setEmployee(locationUpdate.getEmployee());
-        //TODO get current site instead of defaulting to Aston Main Building
-        employeeRiskLevelRepository.save(employeeRiskLevel);
+        Site currentSite = stateService.currentSite();
+        if (currentSite != null) {
+            EmployeeRiskLevel employeeRiskLevel = calculateRiskLevel(currentSite.getSiteLocation(), locationUpdate.getLocation());
+            employeeRiskLevel.setEmployee(locationUpdate.getEmployee());
+            employeeRiskLevelRepository.save(employeeRiskLevel);
+        }
     }
 
     private EmployeeRiskLevel calculateRiskLevel(Location eventLocation, Location employeeLocation) {
