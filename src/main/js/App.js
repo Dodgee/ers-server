@@ -6,10 +6,10 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 
 import Home from './Home.js'
 
-import Risks from './Risks.js'
-import AllRisk from './AllRisk.js'
-import HighRisk from './HighRisk.js'
-import LowRisk from './LowRisk.js'
+import Risks from './risks/Risks.js'
+import AllRisk from './risks/AllRisk.js'
+import HighRisk from './risks/HighRisk.js'
+import LowRisk from './risks/LowRisk.js'
 
 import Control from './Control.js'
 
