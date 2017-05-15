@@ -33,7 +33,7 @@ class Control extends React.Component {
     getCurrentSystemSite() {
         axios.get('http://localhost:8080/system/site')
             .then(response => {
-                this.setState({ site: response.data });
+                this.setState({ site: response.data.siteName });
             });
     }
 

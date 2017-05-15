@@ -8,7 +8,7 @@ class ControlInfo extends React.Component {
 
     render() {
         return (
-            <div className="col-xs-3">
+            <div className="col-xs-4" style={{"borderRight": "1px solid #DDD"}}>
                 <h3>System State: {this.props.state}</h3>
                 <h3>Current Site: {this.props.site}</h3>
             </div>

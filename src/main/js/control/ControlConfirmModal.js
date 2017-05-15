@@ -37,7 +37,7 @@ class ControlConfirmModal extends React.Component {
                     <p>If you are sure please press 'Confirm', otherwise 'Cancel'.</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button bsStyle="primary" onClick={this.props.onConfirm}>Confirm</Button>
+                    <Button bsStyle="primary" onClick={this.props.onConfirm} style={{"float": "left"}}>Confirm</Button>
                     <Button onClick={this.close.bind(this)}>Cancel</Button>
                 </Modal.Footer>
             </Modal>

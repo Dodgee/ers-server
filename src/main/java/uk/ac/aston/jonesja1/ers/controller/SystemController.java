@@ -28,8 +28,8 @@ public class SystemController {
     public ResponseEntity<String> start(@PathVariable String siteKey) {
         Site site = siteService.findByKey(siteKey);
         if (site != null) {
-            stateService.updateSystemState(SystemState.EMERGENCY);
             stateService.updateCurrentSite(site);
+            stateService.updateSystemState(SystemState.EMERGENCY);
             return new ResponseEntity<String>("Emergency Triggered for Site: " + siteKey, HttpStatus.OK);
         }
         return new ResponseEntity<String>("Site does not exist: " + siteKey, HttpStatus.BAD_REQUEST);
