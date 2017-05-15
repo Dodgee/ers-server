@@ -42,7 +42,7 @@ class LowRisk extends React.Component {
     render() {
         return (
             <div>
-                <h1>Employees at Low Risk</h1>
+                <h3>Employees at Low Risk</h3>
                 <RiskTable employeeRisks={this.state.employeeRisks} />
             </div>
         )

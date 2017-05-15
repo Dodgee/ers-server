@@ -42,7 +42,7 @@ class AllRisk extends React.Component {
     render() {
         return (
             <div>
-                <h1>All</h1>
+                <h3>All</h3>
                 <RiskTable employeeRisks={this.state.employeeRisks} />
             </div>
         )

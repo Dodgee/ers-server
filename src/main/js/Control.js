@@ -14,7 +14,7 @@ class Control extends React.Component {
 
     render() {
         return (
-            <h1>Control</h1>
+            <h3>Control</h3>
         )
     }
 }
