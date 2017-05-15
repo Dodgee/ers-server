@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import Nav from './nav/NavTabs.js'
+import RiskTabs from './nav/RiskTabs.js'
 
 class Home extends React.Component {
 
@@ -16,9 +16,11 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div>
-                <Nav />
-                {this.props.children}
+            <div className="panel panel-default">
+                <div className="panel panel-body">
+                    <RiskTabs />
+                    {this.props.children}
+                </div>
             </div>
         )
     }

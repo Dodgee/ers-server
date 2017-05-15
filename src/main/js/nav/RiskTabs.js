@@ -2,7 +2,7 @@ import React from 'react';
 
 import Tab from './Tab.js'
 
-class NavTabs extends React.Component {
+class RiskTabs extends React.Component {
 
     render() {
         return (
@@ -18,4 +18,4 @@ class NavTabs extends React.Component {
 
 };
 
-export default NavTabs;
+export default RiskTabs;
