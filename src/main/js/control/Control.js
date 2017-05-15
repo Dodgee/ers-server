@@ -20,6 +20,10 @@ class Control extends React.Component {
         this.getCurrentSystemStatus();
     }
 
+    onActionTriggered() {
+        this.getCurrentSystemStatus();
+    }
+
     getCurrentSystemStatus() {
         axios.get('http://localhost:8080/system/state')
             .then(response => {
@@ -41,7 +45,8 @@ class Control extends React.Component {
         return (
             <div className="row">
                 <ControlInfo state={this.state.state} site={this.state.site} />
-                <ControlActions state={this.state.state} site={this.state.site} />
+                <ControlActions state={this.state.state} site={this.state.site}
+                                onActionTriggered={() => this.onActionTriggered()} />
             </div>
         )
     }

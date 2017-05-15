@@ -16,12 +16,13 @@ class ControlActions extends React.Component {
         this.setState({ showModal: true})
     }
 
-    confirmCallback() {
+    triggerEmergency() {
         axios.post(
             'http://localhost:8080/system/start/CAPAST',
             {}
         ).then(response => {
             this.setState({showModal: false});
+            this.props.onActionTriggered();
         })
     }
 
@@ -29,7 +30,7 @@ class ControlActions extends React.Component {
         return (
             <div className="col-xs-8">
                 <Button bsStyle="danger" bsSize="large" onClick={this.displayModal.bind(this)}>Trigger Emergency</Button>
-                <ControlConfirmModal showModal={this.state.showModal} onConfirm={this.confirmCallback.bind(this)} />
+                <ControlConfirmModal showModal={this.state.showModal} onConfirm={this.triggerEmergency.bind(this)} />
             </div>
         )
     }
