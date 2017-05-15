@@ -14,11 +14,7 @@ class Control extends React.Component {
 
     render() {
         return (
-            <div className="panel panel-default">
-                <div className="panel panel-body">
-                    <h1>Control</h1>
-                </div>
-            </div>
+            <h1>Control</h1>
         )
     }
 }

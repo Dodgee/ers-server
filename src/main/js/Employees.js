@@ -14,11 +14,7 @@ class Employees extends React.Component {
 
     render() {
         return (
-            <div className="panel panel-default">
-                <div className="panel panel-body">
-                    <h1>Employees</h1>
-                </div>
-            </div>
+            <h1>Employees</h1>
         )
     }
 }

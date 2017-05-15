@@ -19,7 +19,11 @@ class Home extends React.Component {
             <div className="panel panel-default">
                 <div className="panel panel-body">
                     <MainTabs />
-                    {this.props.children}
+                    <div className="panel panel-default" style={{"marginTop": "40px"}}>
+                        <div className="panel panel-body">
+                            {this.props.children}
+                        </div>
+                    </div>
                 </div>
             </div>
         )

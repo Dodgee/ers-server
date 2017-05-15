@@ -16,11 +16,9 @@ class Risks extends React.Component {
 
     render() {
         return (
-            <div className="panel panel-default">
-                <div className="panel panel-body">
-                    <RiskTabs />
-                    {this.props.children}
-                </div>
+            <div>
+                <RiskTabs />
+                {this.props.children}
             </div>
         )
     }

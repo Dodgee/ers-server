@@ -37,7 +37,6 @@ class App extends React.Component {
                         <Route path="low" component={LowRisk}/>
                     </Route>
                     <Route path="control" component={Control}/>
-
                 </Route>
             </Router>
         )
