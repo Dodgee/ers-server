@@ -11,7 +11,7 @@ import AllRisk from './risks/AllRisk.js'
 import HighRisk from './risks/HighRisk.js'
 import LowRisk from './risks/LowRisk.js'
 
-import Control from './Control.js'
+import Control from './control/Control.js'
 
 import Employees from './Employees.js'
 
