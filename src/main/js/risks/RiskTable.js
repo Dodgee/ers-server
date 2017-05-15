@@ -1,9 +1,7 @@
 'use strict';
 
 import React from 'react'
-import { Table } from 'react-bootstrap'
-
-import EmployeeRisk from './EmployeeRisk.js'
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 class RiskTable extends React.Component {
 
@@ -12,29 +10,18 @@ class RiskTable extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({employeeRisks: this.props.employeeRisks})
+
     }
 
     render() {
-        var employeeRisks = this.props.employeeRisks.map(risk =>
-            <EmployeeRisk risk={risk} />
-        );
-
         return (
-            <Table striped bordered condensed hover>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Employee Number</th>
-                        <th>Email</th>
-                        <th>Risk Level</th>
-                        <th>Distance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {employeeRisks}
-                </tbody>
-            </Table>
+            <BootstrapTable data={this.props.employeeRisks} striped={true} hover={true}>
+                <TableHeaderColumn dataField="employee" dataFormat={(employee) => { return employee.employeeId }} isKey={true} dataAlign="left" dataSort={true}>Employee ID</TableHeaderColumn>
+                <TableHeaderColumn dataField="employee" dataFormat={(employee) => { return employee.name }} dataSort={true}>Name</TableHeaderColumn>
+                <TableHeaderColumn dataField="employee" dataFormat={(employee) => { return employee.emailAddress }} dataSort={true}>Email Address</TableHeaderColumn>
+                <TableHeaderColumn dataField="riskLevel" dataSort={true}>Risk Level</TableHeaderColumn>
+                <TableHeaderColumn dataField="distance" dataSort={true}>Distance</TableHeaderColumn>
+            </BootstrapTable>
         )
     }
 }
