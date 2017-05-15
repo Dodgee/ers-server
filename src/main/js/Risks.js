@@ -2,9 +2,9 @@
 
 import React from 'react'
 
-import MainTabs from './nav/MainTabs.js'
+import RiskTabs from './nav/RiskTabs.js'
 
-class Home extends React.Component {
+class Risks extends React.Component {
 
     constructor(props) {
         super(props);
@@ -18,7 +18,7 @@ class Home extends React.Component {
         return (
             <div className="panel panel-default">
                 <div className="panel panel-body">
-                    <MainTabs />
+                    <RiskTabs />
                     {this.props.children}
                 </div>
             </div>
@@ -26,4 +26,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+export default Risks;

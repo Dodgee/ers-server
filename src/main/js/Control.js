@@ -2,9 +2,7 @@
 
 import React from 'react'
 
-import MainTabs from './nav/MainTabs.js'
-
-class Home extends React.Component {
+class Control extends React.Component {
 
     constructor(props) {
         super(props);
@@ -18,12 +16,11 @@ class Home extends React.Component {
         return (
             <div className="panel panel-default">
                 <div className="panel panel-body">
-                    <MainTabs />
-                    {this.props.children}
+                    <h1>Control</h1>
                 </div>
             </div>
         )
     }
 }
 
-export default Home;
+export default Control;

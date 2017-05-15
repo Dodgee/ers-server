@@ -8,9 +8,9 @@ class RiskTabs extends React.Component {
         return (
             <nav>
                 <ul className="nav nav-tabs">
-                    <Tab to="/" onlyActiveOnIndex>All</Tab>
-                    <Tab to="/risk/high">High Risk</Tab>
-                    <Tab to="/risk/low">Low Risk</Tab>
+                    <Tab to="/risks" onlyActiveOnIndex>All</Tab>
+                    <Tab to="/risks/high">High Risk</Tab>
+                    <Tab to="/risks/low">Low Risk</Tab>
                 </ul>
             </nav>
         );
