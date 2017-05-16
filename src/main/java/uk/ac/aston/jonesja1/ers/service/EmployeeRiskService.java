@@ -2,6 +2,7 @@ package uk.ac.aston.jonesja1.ers.service;
 
 import org.geotools.referencing.GeodeticCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import uk.ac.aston.jonesja1.ers.model.*;
 import uk.ac.aston.jonesja1.ers.repository.EmployeeRiskLevelRepository;
@@ -13,6 +14,9 @@ import java.util.List;
 
 @Service
 public class EmployeeRiskService {
+
+    @Value("${ers.server.risk.distance.min}")
+    private double minimumDistanceFromRisk;
 
     @Autowired
     private EmployeeRiskLevelRepository employeeRiskLevelRepository;
@@ -58,16 +62,23 @@ public class EmployeeRiskService {
 
         EmployeeRiskLevel riskLevel = new EmployeeRiskLevel();
         riskLevel.setDistance(BigDecimal.valueOf(displacement));
-        riskLevel.setDateCreated(LocalDateTime.now());
+        riskLevel.setUpdatedAt(LocalDateTime.now());
         riskLevel.setRiskLevel(generateRiskLevel(displacement));
         return riskLevel;
     }
 
     private RiskLevel generateRiskLevel(double distance) {
-        //TODO extract 250 into config or store locations in the database?
-        if (distance < 250) {
+        if (distance < getMinimumDistanceFromRisk()) {
             return RiskLevel.HIGH;
         }
         return RiskLevel.LOW;
+    }
+
+    public double getMinimumDistanceFromRisk() {
+        return minimumDistanceFromRisk;
+    }
+
+    public void setMinimumDistanceFromRisk(double minimumDistanceFromRisk) {
+        this.minimumDistanceFromRisk = minimumDistanceFromRisk;
     }
 }

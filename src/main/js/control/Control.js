@@ -12,32 +12,44 @@ class Control extends React.Component {
         super(props);
         this.state = {
             state: "CALM",
-            site: "N/A"
+            site: "N/A",
+            sites: []
         }
     }
 
     componentDidMount() {
         this.getCurrentSystemStatus();
+        this.getCurrentSystemSite();
+        this.getAvailableSystemSites();
     }
 
     onActionTriggered() {
         this.getCurrentSystemStatus();
+        this.getCurrentSystemSite();
     }
 
     getCurrentSystemStatus() {
         axios.get('http://localhost:8080/system/state')
             .then(response => {
                 this.setState({ state: response.data });
-                if (response.data == "EMERGENCY") {
-                    this.getCurrentSystemSite();
-                }
+            });
+    }
+
+    getAvailableSystemSites() {
+        axios.get('http://localhost:8080/system/sites')
+            .then(response => {
+                this.setState({ sites: response.data });
             });
     }
 
     getCurrentSystemSite() {
         axios.get('http://localhost:8080/system/site')
             .then(response => {
-                this.setState({ site: response.data.siteName });
+                if (response.data.siteName && response.data.siteName !== 'undefined') {
+                    this.setState({site: response.data.siteName});
+                } else {
+                    this.setState({site: 'N/A'});
+                }
             });
     }
 
@@ -45,7 +57,7 @@ class Control extends React.Component {
         return (
             <div className="row">
                 <ControlInfo state={this.state.state} site={this.state.site} />
-                <ControlActions state={this.state.state} site={this.state.site}
+                <ControlActions sites={this.state.sites}
                                 onActionTriggered={() => this.onActionTriggered()} />
             </div>
         )

@@ -11,6 +11,7 @@ import uk.ac.aston.jonesja1.ers.model.Employee;
 import uk.ac.aston.jonesja1.ers.service.employee.EmployeeService;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/register")
@@ -24,6 +25,7 @@ public class RegisterController {
     @RequestMapping(method = RequestMethod.PUT, value = "/", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity register(@Valid @RequestBody final Employee employee) {
         logger.info("Register Request Received: {}", employee.getEmployeeId());
+        employee.setRegisteredAt(LocalDateTime.now());
         Employee enrolled = employeeService.enroll(employee);
         if (enrolled == null) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);

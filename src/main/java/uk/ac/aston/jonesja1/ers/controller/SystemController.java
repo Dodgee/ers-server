@@ -11,6 +11,8 @@ import uk.ac.aston.jonesja1.ers.service.SiteService;
 import uk.ac.aston.jonesja1.ers.service.notification.DeviceNotificationService;
 import uk.ac.aston.jonesja1.ers.service.state.StateService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/system/")
 public class SystemController {
@@ -37,11 +39,11 @@ public class SystemController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/stop")
     public ResponseEntity<String> stop() {
-        stateService.updateSystemState(SystemState.CALM);
-        stateService.updateCurrentSite(null);
         NotificationRequest notificationRequest = new NotificationRequest();
         notificationRequest.setState(SystemState.CALM);
         notificationRequest.setSite(stateService.currentSite().getSiteName());
+        stateService.updateSystemState(SystemState.CALM);
+        stateService.updateCurrentSite(null);
         deviceNotificationService.notifyAll(notificationRequest);
 
         return new ResponseEntity<String>("CALM Mode Triggered.", HttpStatus.OK);
@@ -57,6 +59,12 @@ public class SystemController {
     public ResponseEntity<Site> currentSite() {
         Site site = stateService.currentSite();
         return new ResponseEntity<>(site, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sites")
+    public ResponseEntity<List<Site>> sites() {
+        List<Site> sites = siteService.findAll();
+        return new ResponseEntity<>(sites, HttpStatus.OK);
     }
 
 }

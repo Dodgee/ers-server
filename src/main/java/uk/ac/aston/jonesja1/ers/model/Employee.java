@@ -3,6 +3,7 @@ package uk.ac.aston.jonesja1.ers.model;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 public class Employee {
 
@@ -28,9 +29,9 @@ public class Employee {
     @NotNull
     private String emailAddress;
 
-    private DeviceType deviceType;
-
     private String connectionDetails;
+
+    private LocalDateTime registeredAt;
 
     public String getId() {
         return id;
@@ -64,19 +65,19 @@ public class Employee {
         this.emailAddress = emailAddress;
     }
 
-    public DeviceType getDeviceType() {
-        return deviceType;
-    }
-
-    public void setDeviceType(DeviceType deviceType) {
-        this.deviceType = deviceType;
-    }
-
     public String getConnectionDetails() {
         return connectionDetails;
     }
 
     public void setConnectionDetails(String connectionDetails) {
         this.connectionDetails = connectionDetails;
+    }
+
+    public LocalDateTime getRegisteredAt() {
+        return registeredAt;
+    }
+
+    public void setRegisteredAt(LocalDateTime registeredAt) {
+        this.registeredAt = registeredAt;
     }
 }

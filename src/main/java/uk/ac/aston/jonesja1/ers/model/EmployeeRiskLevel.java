@@ -16,7 +16,7 @@ public class EmployeeRiskLevel {
 
     private BigDecimal distance;
 
-    private LocalDateTime dateCreated;
+    private LocalDateTime updatedAt;
 
     public String getId() {
         return id;
@@ -51,11 +51,11 @@ public class EmployeeRiskLevel {
         this.distance = distance;
     }
 
-    public LocalDateTime getDateCreated() {
-        return dateCreated;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

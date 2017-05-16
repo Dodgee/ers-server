@@ -29,7 +29,7 @@ class ControlConfirmModal extends React.Component {
                     <Modal.Title>Trigger an Emergency</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>You are about to trigger an emergency.</p>
+                    <p>You are about to trigger an emergency at {this.props.selectedSite}.</p>
                     <p>
                         This will notify all employees with devices enrolled on the system and attempt to ascertain their locations.
                         When the emergency is resolved press 'Resolved' on this screen to notify employees the emergency is over.

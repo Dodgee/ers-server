@@ -8,6 +8,8 @@ import uk.ac.aston.jonesja1.ers.repository.SiteRepository;
 
 import javax.annotation.PostConstruct;
 
+import java.util.List;
+
 import static uk.ac.aston.jonesja1.ers.constants.Sites.*;
 
 @Service
@@ -43,4 +45,7 @@ public class SiteService {
         }
     }
 
+    public List<Site> findAll() {
+        return siteRepository.findAll();
+    }
 }
