@@ -57,7 +57,7 @@ class Control extends React.Component {
         return (
             <div className="row">
                 <ControlInfo state={this.state.state} site={this.state.site} />
-                <ControlActions sites={this.state.sites}
+                <ControlActions state={this.state.state} sites={this.state.sites}
                                 onActionTriggered={() => this.onActionTriggered()} />
             </div>
         )

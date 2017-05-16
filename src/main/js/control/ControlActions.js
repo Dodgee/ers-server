@@ -63,10 +63,11 @@ class ControlActions extends React.Component {
         return (
             <div className="col-xs-8">
                 <DropdownButton bsStyle="danger" bsSize="large" title="Trigger Emergency"
-                                onSelect={this.displayTriggerModal.bind(this)}>
+                                disabled={this.props.state == 'EMERGENCY'} onSelect={this.displayTriggerModal.bind(this)}>
                     {menuItems}
                 </DropdownButton>
-                <Button bsStyle="primary" bsSize="large" onClick={this.resolveEmergency.bind(this)} style={{"float": "right"}}>Resolve</Button>
+                <Button bsStyle="primary" bsSize="large" disabled={this.props.state == 'CALM'}
+                        onClick={this.resolveEmergency.bind(this)} style={{"float": "right"}}>Resolve</Button>
                 <ControlConfirmModal showModal={this.state.showModal} selectedSiteKey={this.state.selectedSiteKey}
                                      selectedSiteName={this.state.selectedSiteName} onConfirm={this.triggerEmergency.bind(this)} />
             </div>
