@@ -24,7 +24,7 @@ class LocationModal extends React.Component {
 
         const ZoomedGoogleMap = withGoogleMap(props => (
             <GoogleMap
-                defaultZoom={18}
+                defaultZoom={17}
                 defaultCenter={{ lat: parseFloat(this.props.latitude), lng: parseFloat(this.props.longitude) }}
             >
                 <Marker

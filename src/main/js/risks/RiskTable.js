@@ -33,6 +33,12 @@ class RiskTable extends React.Component {
         });
     }
 
+    formatDistance(data) {
+        var distanceInMeters = data.toFixed(2);
+        var distanceInKilometers = distanceInMeters / 1000;
+        return "" + distanceInKilometers.toFixed(3) + " km"
+    }
+
     render() {
         return (
             <div>
@@ -41,7 +47,7 @@ class RiskTable extends React.Component {
                     <TableHeaderColumn dataField="employee" dataFormat={(employee) => { return employee.name }} dataSort={true}>Name</TableHeaderColumn>
                     <TableHeaderColumn dataField="employee" dataFormat={(employee) => { return employee.emailAddress }} dataSort={true}>Email Address</TableHeaderColumn>
                     <TableHeaderColumn dataField="riskLevel" dataSort={true}>Risk Level</TableHeaderColumn>
-                    <TableHeaderColumn dataField="distance" dataSort={true}>Distance</TableHeaderColumn>
+                    <TableHeaderColumn dataField="distance" dataFormat={this.formatDistance} dataSort={true}>Distance</TableHeaderColumn>
                 </BootstrapTable>
                 <LocationModal showModal={this.state.showModal} onClosed={this.onModalClosed.bind(this)}
                                longitude={this.state.selectedEmployeeLongitude} latitude={this.state.selectedEmployeeLatitude} />

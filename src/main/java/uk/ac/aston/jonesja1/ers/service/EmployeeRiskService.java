@@ -1,6 +1,7 @@
 package uk.ac.aston.jonesja1.ers.service;
 
 import org.geotools.referencing.GeodeticCalculator;
+import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,7 @@ public class EmployeeRiskService {
     }
 
     private EmployeeRiskLevel calculateRiskLevel(Location eventLocation, Location employeeLocation) {
-        GeodeticCalculator calculator = new GeodeticCalculator();
+        GeodeticCalculator calculator = new GeodeticCalculator(DefaultGeographicCRS.WGS84);
         calculator.setStartingGeographicPoint(eventLocation.getLongitude().doubleValue(), eventLocation.getLatitude().doubleValue());
         calculator.setDestinationGeographicPoint(employeeLocation.getLongitude().doubleValue(), employeeLocation.getLatitude().doubleValue());
         double displacement = calculator.getOrthodromicDistance();
