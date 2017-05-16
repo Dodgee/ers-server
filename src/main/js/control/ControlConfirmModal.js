@@ -29,7 +29,7 @@ class ControlConfirmModal extends React.Component {
                     <Modal.Title>Trigger an Emergency</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>You are about to trigger an emergency at {this.props.selectedSite}.</p>
+                    <p>You are about to trigger an emergency at {this.props.selectedSiteName}.</p>
                     <p>
                         This will notify all employees with devices enrolled on the system and attempt to ascertain their locations.
                         When the emergency is resolved press 'Resolved' on this screen to notify employees the emergency is over.
@@ -37,7 +37,7 @@ class ControlConfirmModal extends React.Component {
                     <p>If you are sure please press 'Confirm', otherwise 'Cancel'.</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button bsStyle="primary" onClick={this.props.onConfirm} style={{"float": "left"}}>Confirm</Button>
+                    <Button bsStyle="primary" onClick={() => this.props.onConfirm(this.props.selectedSiteKey)} style={{"float": "left"}}>Confirm</Button>
                     <Button onClick={this.close.bind(this)}>Cancel</Button>
                 </Modal.Footer>
             </Modal>

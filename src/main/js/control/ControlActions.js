@@ -12,14 +12,24 @@ class ControlActions extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        var sites = {};
+        nextProps.sites.reduce(function(sites, site) {
+            sites[site.key] = site;
+            return sites;
+        }, sites);
+        this.setState({ sites : sites});
+    }
+
     displayTriggerModal(selectedSiteKey) {
-        this.setState({ selectedSite: selectedSiteKey})
+        this.setState({ selectedSiteKey: selectedSiteKey});
+        this.setState({ selectedSiteName: this.state.sites[selectedSiteKey].siteName});
         this.setState({ showModal: true})
     }
 
-    triggerEmergency() {
+    triggerEmergency(selectedSiteKey) {
         axios.post(
-            'http://localhost:8080/system/start/CAPAST',
+            'http://localhost:8080/system/start/' + selectedSiteKey,
             {}
         ).then(response => {
             this.setState({showModal: false});
@@ -39,8 +49,16 @@ class ControlActions extends React.Component {
     render() {
 
         var menuItems = (this.props.sites.map(site => {
-            return (<MenuItem eventKey={site.siteName}>{site.siteName}</MenuItem>)
+            return ([
+                <MenuItem eventKey={site.key}>{site.siteName}</MenuItem>,
+                <MenuItem divider/>
+            ])
         }));
+
+        //nasty hack to remove the final <MenuItem divider />
+        if (menuItems.length > 0) {
+            menuItems[menuItems.length - 1].pop();
+        }
 
         return (
             <div className="col-xs-8">
@@ -49,7 +67,8 @@ class ControlActions extends React.Component {
                     {menuItems}
                 </DropdownButton>
                 <Button bsStyle="primary" bsSize="large" onClick={this.resolveEmergency.bind(this)} style={{"float": "right"}}>Resolve</Button>
-                <ControlConfirmModal showModal={this.state.showModal} selectedSite={this.state.selectedSite} onConfirm={this.triggerEmergency.bind(this)} />
+                <ControlConfirmModal showModal={this.state.showModal} selectedSiteKey={this.state.selectedSiteKey}
+                                     selectedSiteName={this.state.selectedSiteName} onConfirm={this.triggerEmergency.bind(this)} />
             </div>
         )
     }
