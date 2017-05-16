@@ -29,7 +29,7 @@ class ControlActions extends React.Component {
 
     triggerEmergency(selectedSiteKey) {
         axios.post(
-            'http://localhost:8080/system/start/' + selectedSiteKey,
+            'http://ers-server-dev.herokuapp.com/system/start/' + selectedSiteKey,
             {}
         ).then(response => {
             this.setState({showModal: false});
@@ -39,7 +39,7 @@ class ControlActions extends React.Component {
 
     resolveEmergency() {
         axios.post(
-            'http://localhost:8080/system/stop',
+            'http://ers-server-dev.herokuapp.com/system/stop',
             {}
         ).then(response => {
             this.props.onActionTriggered();

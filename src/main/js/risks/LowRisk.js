@@ -25,7 +25,7 @@ class LowRisk extends React.Component {
     }
 
     getRiskData() {
-        axios.get('http://localhost:8080/risk/low')
+        axios.get('http://ers-server-dev.herokuapp.com/risk/low')
             .then(response => {
                 this.setState({ employeeRisks: response.data.employeeRiskLevels });
             });

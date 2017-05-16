@@ -18,7 +18,7 @@ class Employees extends React.Component {
     }
 
     getEmployeeData() {
-        axios.get('http://localhost:8080/employee/')
+        axios.get('http://ers-server-dev.herokuapp.com/employee/')
             .then(response => {
                 this.setState({ employees: response.data });
             });
