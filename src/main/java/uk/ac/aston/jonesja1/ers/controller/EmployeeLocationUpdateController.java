@@ -31,7 +31,7 @@ public class EmployeeLocationUpdateController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void update(@Valid @RequestBody LocationUpdateRequest locationUpdateRequest) {
-        logger.debug("Received Update Request for Employee {}", locationUpdateRequest.getId());
+        logger.info("Received Update Request for Employee {}", locationUpdateRequest.getId());
         Employee employee = employeeService.find(locationUpdateRequest.getId());
         if (employee == null) {
             logger.error("Employee {} is not enrolled to use this system.", locationUpdateRequest.getId());
@@ -44,7 +44,7 @@ public class EmployeeLocationUpdateController {
                     )
             );
             employeeRiskService.calculateEmployeeRiskLevel(locationUpdate);
-            logger.debug("Processed Update Request for Employee {}", locationUpdateRequest.getId());
+            logger.info("Processed Update Request for Employee {}", locationUpdateRequest.getId());
         }
     }
 

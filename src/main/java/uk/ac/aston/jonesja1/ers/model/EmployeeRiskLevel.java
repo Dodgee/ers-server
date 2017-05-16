@@ -18,6 +18,8 @@ public class EmployeeRiskLevel {
 
     private LocalDateTime updatedAt;
 
+    private Location lastKnownLocation;
+
     public String getId() {
         return id;
     }
@@ -57,5 +59,13 @@ public class EmployeeRiskLevel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Location getLastKnownLocation() {
+        return lastKnownLocation;
+    }
+
+    public void setLastKnownLocation(Location lastKnownLocation) {
+        this.lastKnownLocation = lastKnownLocation;
     }
 }

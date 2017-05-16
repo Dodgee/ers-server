@@ -64,6 +64,7 @@ public class EmployeeRiskService {
         riskLevel.setDistance(BigDecimal.valueOf(displacement));
         riskLevel.setUpdatedAt(LocalDateTime.now());
         riskLevel.setRiskLevel(generateRiskLevel(displacement));
+        riskLevel.setLastKnownLocation(employeeLocation);
         return riskLevel;
     }
 
