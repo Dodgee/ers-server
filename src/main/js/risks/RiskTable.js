@@ -1,7 +1,8 @@
 'use strict';
 
-import React from 'react'
+import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import moment from "moment";
 import LocationModal from "./LocationModal";
 
 class RiskTable extends React.Component {
@@ -39,6 +40,10 @@ class RiskTable extends React.Component {
         return "" + distanceInKilometers.toFixed(3) + " km"
     }
 
+    formatTime(data) {
+        return moment(data * 1000).format('MMMM Do YYYY - HH:mm:ss')
+    }
+
     render() {
         return (
             <div>
@@ -48,6 +53,7 @@ class RiskTable extends React.Component {
                     <TableHeaderColumn dataField="employee" dataFormat={(employee) => { return employee.emailAddress }} dataSort={true}>Email Address</TableHeaderColumn>
                     <TableHeaderColumn dataField="riskLevel" dataSort={true}>Risk Level</TableHeaderColumn>
                     <TableHeaderColumn dataField="distance" dataFormat={this.formatDistance} dataSort={true}>Distance</TableHeaderColumn>
+                    <TableHeaderColumn dataField="lastUpdatedAt" dataFormat={this.formatTime}dataSort={true}>Updated At</TableHeaderColumn>
                 </BootstrapTable>
                 <LocationModal showModal={this.state.showModal} onClosed={this.onModalClosed.bind(this)}
                                longitude={this.state.selectedEmployeeLongitude} latitude={this.state.selectedEmployeeLatitude} />

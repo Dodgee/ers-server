@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 public class EmployeeRiskLevel {
 
@@ -55,6 +56,10 @@ public class EmployeeRiskLevel {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public long getLastUpdatedAt() {
+        return getUpdatedAt().toEpochSecond(ZoneOffset.UTC);
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
