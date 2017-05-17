@@ -12,7 +12,8 @@ class RiskTable extends React.Component {
         this.state = {
             showModal: false,
             selectedEmployeeLongitude: null,
-            selectedEmployeeLatitude: null
+            selectedEmployeeLatitude: null,
+            selectedEmployeeName: ""
         }
     }
 
@@ -24,7 +25,8 @@ class RiskTable extends React.Component {
         this.setState({
             showModal: true,
             selectedEmployeeLongitude: employee.lastKnownLocation.longitude,
-            selectedEmployeeLatitude: employee.lastKnownLocation.latitude
+            selectedEmployeeLatitude: employee.lastKnownLocation.latitude,
+            selectedEmployeeName: employee.employee.name
         })
     }
 
@@ -56,7 +58,8 @@ class RiskTable extends React.Component {
                     <TableHeaderColumn dataField="lastUpdatedAt" dataFormat={this.formatTime}dataSort={true}>Updated At</TableHeaderColumn>
                 </BootstrapTable>
                 <LocationModal showModal={this.state.showModal} onClosed={this.onModalClosed.bind(this)}
-                               longitude={this.state.selectedEmployeeLongitude} latitude={this.state.selectedEmployeeLatitude} />
+                               longitude={this.state.selectedEmployeeLongitude} latitude={this.state.selectedEmployeeLatitude}
+                               employeeName={this.state.selectedEmployeeName} />
             </div>
         )
     }

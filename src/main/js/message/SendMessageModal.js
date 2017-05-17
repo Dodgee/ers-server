@@ -27,12 +27,13 @@ class SendMessageModal extends React.Component {
     }
 
     sendMessage() {
-        axios.post('http://localhost:8080/notify/employee/' + this.props.employeeId,
+        axios.post('http://ers-server-dev.herokuapp.com/notify/employee/' + this.props.employeeId,
             this.state.message,
             {
                 headers: {'Content-Type': 'text/plain'}
             }
         )
+        this.close();
     }
 
     render() {
@@ -49,9 +50,7 @@ class SendMessageModal extends React.Component {
                     </FormGroup>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button type="submit" onClick={this.sendMessage.bind(this)}>
-                        Send
-                    </Button>
+                    <Button type="submit" bsStyle="primary" style={{"float": "left"}} onClick={this.sendMessage.bind(this)}>Send</Button>
                     <Button onClick={this.close.bind(this)}>Cancel</Button>
                 </Modal.Footer>
             </Modal>

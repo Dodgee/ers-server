@@ -36,7 +36,7 @@ class LocationModal extends React.Component {
         return (
             <Modal show={this.state.showModal} onHide={this.close.bind(this)} bsSize="large">
                 <Modal.Header closeButton>
-                    <Modal.Title>Location</Modal.Title>
+                    <Modal.Title>Location of {this.props.employeeName}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <ZoomedGoogleMap
@@ -49,7 +49,7 @@ class LocationModal extends React.Component {
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.close.bind(this)}>Cancel</Button>
+                    <Button onClick={this.close.bind(this)}>Close</Button>
                 </Modal.Footer>
             </Modal>
         );
