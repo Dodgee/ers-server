@@ -67,7 +67,7 @@ class ControlActions extends React.Component {
                     {menuItems}
                 </DropdownButton>
                 <Button bsStyle="primary" bsSize="large" disabled={this.props.state == 'CALM'}
-                        onClick={this.resolveEmergency.bind(this)} style={{"float": "right"}}>Resolve</Button>
+                        onClick={this.resolveEmergency.bind(this)} style={{"float": "right"}}>Cancel Emergency</Button>
                 <ControlConfirmModal showModal={this.state.showModal} selectedSiteKey={this.state.selectedSiteKey}
                                      selectedSiteName={this.state.selectedSiteName} onConfirm={this.triggerEmergency.bind(this)} />
             </div>
