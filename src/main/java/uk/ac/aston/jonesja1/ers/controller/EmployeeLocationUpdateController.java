@@ -36,9 +36,15 @@ public class EmployeeLocationUpdateController {
     @Autowired
     private StateService stateService;
 
+    /**
+     * POST a LocationUpdateRequest from an employee's enrolled device.
+     * @param locationUpdateRequest the request object.
+     * @return http response. 202 if successful. 405 if system is now accepting requests.
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity update(@Valid @RequestBody LocationUpdateRequest locationUpdateRequest) {
         logger.info("Received Update Request for Employee {}", locationUpdateRequest.getId());
+        //if the system is not in EMERGENCY state then do not accept the request. response with a 405 response.
         if (stateService.currentState() == SystemState.EMERGENCY) {
             Employee employee = employeeService.find(locationUpdateRequest.getId());
             if (employee == null) {
@@ -51,7 +57,7 @@ public class EmployeeLocationUpdateController {
                                 BigDecimal.valueOf(locationUpdateRequest.getLatitude())
                         )
                 );
-                employeeRiskService.calculateEmployeeRiskLevel(locationUpdate);
+                employeeRiskService.updateEmployeeRiskLevel(locationUpdate);
                 logger.info("Processed Update Request for Employee {}", locationUpdateRequest.getId());
                 return new ResponseEntity("Accepted", HttpStatus.ACCEPTED);
             }

@@ -35,7 +35,7 @@ public class StateService {
     }
 
     /**
-     * Update Observers that the systemState has changed so they can act accordingly.
+     * Update Observers (clients) that the systemState has changed so they can act accordingly.
      * @param systemState the systemState the application is now in.
      */
     public void updateSystemState(SystemState systemState) {

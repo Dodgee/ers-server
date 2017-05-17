@@ -6,6 +6,9 @@ import uk.ac.aston.jonesja1.ers.model.RiskLevel;
 
 import java.util.List;
 
+/**
+ * MongoDB repository for EmployeeRiskLevel model class.
+ */
 public interface EmployeeRiskLevelRepository extends MongoRepository<EmployeeRiskLevel, Integer> {
 
     List<EmployeeRiskLevel> findAllByRiskLevelEquals(RiskLevel riskLevel);

@@ -17,11 +17,20 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * Get the details of an enrolled employee by their assigned unique id.
+     * @param id the assigned unique id.
+     * @return the employee.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public Employee employee(@PathVariable String id) {
         return employeeService.find(id);
     }
 
+    /**
+     * Get all the enrolled employees
+     * @return list of all employees.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public List<Employee> all() {
         return employeeService.all();

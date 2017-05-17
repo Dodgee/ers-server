@@ -26,14 +26,13 @@ public class NotifyController {
     @Autowired
     private EmployeeService employeeService;
 
-    @Autowired
-    private StateService stateService;
-
-    @Autowired
-    private SiteService siteService;
-
+    /**
+     * Send a message to a single employee.
+     * @param id the unique id of the employee who is to be notified.
+     * @param message the message to send.
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/employee/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
-    public void notify(@PathVariable String id, @RequestBody String message) {
+    public void sendMessage(@PathVariable String id, @RequestBody String message) {
         logger.info("Received Notify Request for Employee {}", id);
         logger.debug("Message {}", message);
         Employee employee = employeeService.find(id);
@@ -46,18 +45,4 @@ public class NotifyController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/{siteKey}/")
-    public void notifyAll(@PathVariable String siteKey) {
-        logger.info("Received Notify Request to all devices.");
-        Site site = siteService.findByKey(siteKey);
-        if (site != null) {
-            logger.info("Sending Notification to all");
-            NotificationRequest notificationRequest = new NotificationRequest();
-            notificationRequest.setSite(site.getSiteName());
-            notificationRequest.setState(stateService.currentState());
-            deviceNotificationService.notifyAll(notificationRequest);
-        } else {
-            logger.warn("Site {} does not exist.", siteKey);
-        }
-    }
 }

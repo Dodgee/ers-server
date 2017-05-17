@@ -22,6 +22,11 @@ public class RegisterController {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * Enrol an Employee with the system.
+     * @param employee the employee details to enrol.
+     * @return the unique id assigned to the employee and http response 400 on bad request. 201 on successfully enrolled.
+     */
     @RequestMapping(method = RequestMethod.PUT, value = "/", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity register(@Valid @RequestBody final Employee employee) {
         logger.info("Register Request Received: {}", employee.getEmployeeId());
@@ -33,6 +38,14 @@ public class RegisterController {
         return new ResponseEntity<>(enrolled.getId(), HttpStatus.CREATED);
     }
 
+    /**
+     * Reauthenticate an employee with the system if their Firebase token has been refreshed.
+     * See https://firebase.google.com/docs/cloud-messaging/android/client#retrieve-the-current-registration-token
+     * for more info on Firebase tokens.
+     * @param token the employees firebase token.
+     * @param id the unique id given to the client device on enrollment.
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/reauthenticate/{id}")
     public ResponseEntity reauthenticate(
             @Valid @RequestBody final String token,
@@ -42,7 +55,7 @@ public class RegisterController {
         if (enrolled != null) {
             enrolled.setConnectionDetails(token);
             employeeService.save(enrolled);
-            return new ResponseEntity<>("Failed to Register User.", HttpStatus.OK);
+            return new ResponseEntity<>("Reauthenticated.", HttpStatus.OK);
         }
         return new ResponseEntity<>("Employee is not enrolled. Please enrol again.", HttpStatus.NOT_FOUND);
     }

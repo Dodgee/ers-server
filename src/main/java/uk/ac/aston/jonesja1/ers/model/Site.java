@@ -2,6 +2,9 @@ package uk.ac.aston.jonesja1.ers.model;
 
 import org.springframework.data.annotation.Id;
 
+/**
+ * A site which an emergency can be triggered at.
+ */
 public class Site {
 
     @Id

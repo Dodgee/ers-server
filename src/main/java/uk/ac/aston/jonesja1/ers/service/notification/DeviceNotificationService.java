@@ -14,9 +14,20 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Send Notifications to devices enrolled with the system.
+ * Uses Firebase Cloud Messaging client to send messages.
+ * see https://firebase.google.com/docs/cloud-messaging/
+ * for more information.
+ */
 @Service
 public class DeviceNotificationService {
     //TODO refactor FCMClient code
+
+    /**
+     * Send a notification to a single device based on their Firebase token.
+     * @param notificationRequest request containing the message to send and who the message is for.
+     */
     public void notifyDevice(SingleNotificationRequest notificationRequest) {
         FcmClient client = new FcmClient(new IFcmClientSettings() {
             @Override
@@ -39,6 +50,10 @@ public class DeviceNotificationService {
         client.send(new DataUnicastMessage(options, notificationRequest.getConnectionToken(), data, null));
     }
 
+    /**
+     * Send a Notification to all devices enrolled with the system.
+     * @param notificationRequest request containing the message details to send.
+     */
     public void notifyAll(NotificationRequest notificationRequest) {
         FcmClient client = new FcmClient(new IFcmClientSettings() {
             @Override

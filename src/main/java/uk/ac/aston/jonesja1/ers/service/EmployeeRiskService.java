@@ -16,6 +16,9 @@ import java.util.List;
 @Service
 public class EmployeeRiskService {
 
+    /**
+     * Configurable distance that employee's have to be from an emergency to be deemed HIGH or LOW risk.
+     */
     @Value("${ers.server.risk.distance.min}")
     private double minimumDistanceFromRisk;
 
@@ -46,7 +49,13 @@ public class EmployeeRiskService {
         return lowRiskLevels;
     }
 
-    public void calculateEmployeeRiskLevel(LocationUpdate locationUpdate) {
+    /**
+     * Update an Employee's Risk Level based on their current location.
+     * Assigns a Risk Level see {@link RiskLevel} by calculating their current distance from the
+     * site having an EMERGENCY.
+     * @param locationUpdate the location update from the employee.
+     */
+    public void updateEmployeeRiskLevel(LocationUpdate locationUpdate) {
         Site currentSite = stateService.currentSite();
         if (currentSite != null) {
             EmployeeRiskLevel employeeRiskLevel = calculateRiskLevel(currentSite.getSiteLocation(), locationUpdate.getLocation());
