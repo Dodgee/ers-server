@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import uk.ac.aston.jonesja1.ers.model.Site;
 import uk.ac.aston.jonesja1.ers.model.SystemState;
 import uk.ac.aston.jonesja1.ers.model.request.NotificationRequest;
+import uk.ac.aston.jonesja1.ers.service.EmployeeRiskService;
 import uk.ac.aston.jonesja1.ers.service.notification.DeviceNotificationService;
 
 @Service
@@ -16,6 +17,9 @@ public class StateService {
 
     @Autowired
     private DeviceNotificationService deviceNotificationService;
+
+    @Autowired
+    private EmployeeRiskService employeeRiskService;
 
     private SystemState currentState;
 
@@ -39,13 +43,19 @@ public class StateService {
      * @param systemState the systemState the application is now in.
      */
     public void updateSystemState(SystemState systemState) {
-        NotificationRequest notificationRequest = new NotificationRequest();
         logger.info("--- {} MODE ACTIVATED ---", systemState.toString());
+        NotificationRequest notificationRequest = new NotificationRequest();
         notificationRequest.setState(systemState);
         notificationRequest.setSite(currentSite().getSiteName());
+
+        currentState = systemState;
+        if(systemState == SystemState.CALM) {
+            employeeRiskService.deleteAll();
+            currentSite = null;
+        }
+
         logger.info("NOTIFYING DEVICES ENTERED {} MODE", systemState.toString());
         deviceNotificationService.notifyAll(notificationRequest);
-        currentState = systemState;
     }
 
     public void updateCurrentSite(Site site) {

@@ -92,4 +92,12 @@ public class EmployeeRiskService {
     public void setMinimumDistanceFromRisk(double minimumDistanceFromRisk) {
         this.minimumDistanceFromRisk = minimumDistanceFromRisk;
     }
+
+    /**
+     * Delete all EmployeeRiskProfiles
+     * Should be called when the service enters CALM mode ready for fresh updates on the next EMERGENCY.
+     */
+    public void deleteAll() {
+        employeeRiskLevelRepository.deleteAll();
+    }
 }

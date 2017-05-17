@@ -6,9 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.aston.jonesja1.ers.model.Site;
 import uk.ac.aston.jonesja1.ers.model.SystemState;
-import uk.ac.aston.jonesja1.ers.model.request.NotificationRequest;
 import uk.ac.aston.jonesja1.ers.service.SiteService;
-import uk.ac.aston.jonesja1.ers.service.notification.DeviceNotificationService;
 import uk.ac.aston.jonesja1.ers.service.state.StateService;
 
 import java.util.List;
@@ -23,8 +21,6 @@ public class SystemController {
     @Autowired
     private SiteService siteService;
 
-    @Autowired
-    private DeviceNotificationService deviceNotificationService;
 
     /**
      * Trigger an emergency at the given site.
@@ -49,13 +45,7 @@ public class SystemController {
      */
     @RequestMapping(method = RequestMethod.POST, value = "/stop")
     public ResponseEntity<String> stop() {
-        NotificationRequest notificationRequest = new NotificationRequest();
-        notificationRequest.setState(SystemState.CALM);
-        notificationRequest.setSite(stateService.currentSite().getSiteName());
         stateService.updateSystemState(SystemState.CALM);
-        stateService.updateCurrentSite(null);
-        deviceNotificationService.notifyAll(notificationRequest);
-
         return new ResponseEntity<String>("CALM Mode Triggered.", HttpStatus.OK);
     }
 
