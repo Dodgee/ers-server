@@ -3,13 +3,16 @@
 import React from 'react'
 import axios  from 'axios'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import SendMessageModal from './message/SendMessageModal.js'
 
 class Employees extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            employees: []
+            employees: [],
+            selectedEmployeeName: null,
+            selectedEmployeeID: null
         }
     }
 
@@ -24,15 +27,32 @@ class Employees extends React.Component {
             });
     }
 
+    displaySendMessageModal(employee) {
+        this.setState({
+            showModal: true,
+            selectedEmployeeName: employee.name,
+            selectedEmployeeID: employee.id
+        })
+    }
+
+    onModalClosed() {
+        this.setState({
+            showModal: false,
+        });
+    }
+
     render() {
         return (
             <div>
                 <h3>Employees Enrolled</h3>
-                <BootstrapTable data={this.state.employees} striped={true} hover={true}>
+                <BootstrapTable data={this.state.employees} striped={true} hover={true} options={{onRowClick: this.displaySendMessageModal.bind(this)}}>
                     <TableHeaderColumn dataField="employeeId" isKey={true} dataAlign="left" dataSort={true}>Employee ID</TableHeaderColumn>
                     <TableHeaderColumn dataField="name" dataSort={true}>Name</TableHeaderColumn>
                     <TableHeaderColumn dataField="emailAddress" dataSort={true}>Email Address</TableHeaderColumn>
                 </BootstrapTable>
+                <SendMessageModal  showModal={this.state.showModal} onClosed={this.onModalClosed.bind(this)}
+                                   employeeName={this.state.selectedEmployeeName}
+                                   employeeId={this.state.selectedEmployeeID}/>
             </div>
         )
     }

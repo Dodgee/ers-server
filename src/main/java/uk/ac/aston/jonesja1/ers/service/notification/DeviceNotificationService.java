@@ -35,8 +35,7 @@ public class DeviceNotificationService {
                 .build();
 
         Map<String, String> data = new HashMap<String, String>();
-        data.put("STATUS", notificationRequest.getState().toString());
-        data.put("SITE", notificationRequest.getSite().toString());
+        data.put("MESSAGE", notificationRequest.getMessage());
         client.send(new DataUnicastMessage(options, notificationRequest.getConnectionToken(), data, null));
     }
 
