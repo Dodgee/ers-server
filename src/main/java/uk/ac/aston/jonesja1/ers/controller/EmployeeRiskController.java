@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import uk.ac.aston.jonesja1.ers.model.EmployeeRiskLevels;
+import uk.ac.aston.jonesja1.ers.model.EmployeeRiskProfiles;
 import uk.ac.aston.jonesja1.ers.service.EmployeeRiskService;
 
 @RestController
@@ -19,7 +19,7 @@ public class EmployeeRiskController {
      * @return all the employeeRiskLevels
      */
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public EmployeeRiskLevels all() {
+    public EmployeeRiskProfiles all() {
         return employeeRiskService.getAllEmployeeRiskLevels();
     }
 
@@ -28,7 +28,7 @@ public class EmployeeRiskController {
      * @return all the employeeRiskLevels classed as HIGH risk.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/high")
-    public EmployeeRiskLevels high() {
+    public EmployeeRiskProfiles high() {
         return employeeRiskService.getHighEmployeeRiskLevels();
     }
 
@@ -37,7 +37,7 @@ public class EmployeeRiskController {
      * @return all the employeeRiskLevels classed as LOW risk.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/low")
-    public EmployeeRiskLevels low() {
+    public EmployeeRiskProfiles low() {
         return employeeRiskService.getLowEmployeeRiskLevels();
     }
 

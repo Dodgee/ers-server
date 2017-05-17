@@ -27,7 +27,7 @@ class AllRisk extends React.Component {
     getRiskData() {
         axios.get('http://ers-server-dev.herokuapp.com/risk/')
             .then(response => {
-                this.setState({ employeeRisks: response.data.employeeRiskLevels });
+                this.setState({ employeeRisks: response.data.employeeRiskProfiles });
             });
     }
 

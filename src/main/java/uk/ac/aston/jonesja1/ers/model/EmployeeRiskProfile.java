@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-public class EmployeeRiskLevel {
+public class EmployeeRiskProfile {
 
     @Id
     private String id;

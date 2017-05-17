@@ -28,24 +28,24 @@ public class EmployeeRiskService {
     @Autowired
     private StateService stateService;
 
-    public EmployeeRiskLevels getAllEmployeeRiskLevels() {
-        List<EmployeeRiskLevel> riskLevels = employeeRiskLevelRepository.findAll();
-        EmployeeRiskLevels allLevels = new EmployeeRiskLevels();
-        allLevels.getEmployeeRiskLevels().addAll(riskLevels);
+    public EmployeeRiskProfiles getAllEmployeeRiskLevels() {
+        List<EmployeeRiskProfile> riskLevels = employeeRiskLevelRepository.findAll();
+        EmployeeRiskProfiles allLevels = new EmployeeRiskProfiles();
+        allLevels.getEmployeeRiskProfiles().addAll(riskLevels);
         return allLevels;
     }
 
-    public EmployeeRiskLevels getHighEmployeeRiskLevels() {
-        List<EmployeeRiskLevel> riskLevels = employeeRiskLevelRepository.findAllByRiskLevelEquals(RiskLevel.HIGH);
-        EmployeeRiskLevels highRiskLevels = new EmployeeRiskLevels();
-        highRiskLevels.getEmployeeRiskLevels().addAll(riskLevels);
+    public EmployeeRiskProfiles getHighEmployeeRiskLevels() {
+        List<EmployeeRiskProfile> riskLevels = employeeRiskLevelRepository.findAllByRiskLevelEquals(RiskLevel.HIGH);
+        EmployeeRiskProfiles highRiskLevels = new EmployeeRiskProfiles();
+        highRiskLevels.getEmployeeRiskProfiles().addAll(riskLevels);
         return highRiskLevels;
     }
 
-    public EmployeeRiskLevels getLowEmployeeRiskLevels() {
-        List<EmployeeRiskLevel> riskLevels = employeeRiskLevelRepository.findAllByRiskLevelEquals(RiskLevel.LOW);
-        EmployeeRiskLevels lowRiskLevels = new EmployeeRiskLevels();
-        lowRiskLevels.getEmployeeRiskLevels().addAll(riskLevels);
+    public EmployeeRiskProfiles getLowEmployeeRiskLevels() {
+        List<EmployeeRiskProfile> riskLevels = employeeRiskLevelRepository.findAllByRiskLevelEquals(RiskLevel.LOW);
+        EmployeeRiskProfiles lowRiskLevels = new EmployeeRiskProfiles();
+        lowRiskLevels.getEmployeeRiskProfiles().addAll(riskLevels);
         return lowRiskLevels;
     }
 
@@ -58,19 +58,19 @@ public class EmployeeRiskService {
     public void updateEmployeeRiskLevel(LocationUpdate locationUpdate) {
         Site currentSite = stateService.currentSite();
         if (currentSite != null) {
-            EmployeeRiskLevel employeeRiskLevel = calculateRiskLevel(currentSite.getSiteLocation(), locationUpdate.getLocation());
-            employeeRiskLevel.setEmployee(locationUpdate.getEmployee());
-            employeeRiskLevelRepository.save(employeeRiskLevel);
+            EmployeeRiskProfile employeeRiskProfile = calculateRiskLevel(currentSite.getSiteLocation(), locationUpdate.getLocation());
+            employeeRiskProfile.setEmployee(locationUpdate.getEmployee());
+            employeeRiskLevelRepository.save(employeeRiskProfile);
         }
     }
 
-    private EmployeeRiskLevel calculateRiskLevel(Location eventLocation, Location employeeLocation) {
+    private EmployeeRiskProfile calculateRiskLevel(Location eventLocation, Location employeeLocation) {
         GeodeticCalculator calculator = new GeodeticCalculator(DefaultGeographicCRS.WGS84);
         calculator.setStartingGeographicPoint(eventLocation.getLongitude().doubleValue(), eventLocation.getLatitude().doubleValue());
         calculator.setDestinationGeographicPoint(employeeLocation.getLongitude().doubleValue(), employeeLocation.getLatitude().doubleValue());
         double displacement = calculator.getOrthodromicDistance();
 
-        EmployeeRiskLevel riskLevel = new EmployeeRiskLevel();
+        EmployeeRiskProfile riskLevel = new EmployeeRiskProfile();
         riskLevel.setDistance(BigDecimal.valueOf(displacement));
         riskLevel.setUpdatedAt(LocalDateTime.now());
         riskLevel.setRiskLevel(generateRiskLevel(displacement));
