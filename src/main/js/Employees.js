@@ -2,7 +2,8 @@
 
 import React from 'react'
 import axios  from 'axios'
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
+import { Alert } from 'react-bootstrap'
 import SendMessageModal from './message/SendMessageModal.js'
 
 class Employees extends React.Component {
@@ -44,6 +45,9 @@ class Employees extends React.Component {
     render() {
         return (
             <div>
+                <Alert bsStyle="info">
+                    Click an Employee to send their device a message.
+                </Alert>
                 <h3>Employees Enrolled</h3>
                 <BootstrapTable data={this.state.employees} striped={true} hover={true} options={{onRowClick: this.displaySendMessageModal.bind(this)}}>
                     <TableHeaderColumn dataField="employeeId" isKey={true} dataAlign="left" dataSort={true}>Employee ID</TableHeaderColumn>
