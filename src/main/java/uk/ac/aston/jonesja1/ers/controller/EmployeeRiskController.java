@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import uk.ac.aston.jonesja1.ers.model.EmployeeRiskProfiles;
-import uk.ac.aston.jonesja1.ers.service.EmployeeRiskService;
+import uk.ac.aston.jonesja1.ers.service.EmployeeRiskServiceImpl;
 
 @RestController
 @RequestMapping("/risk")
 public class EmployeeRiskController {
 
     @Autowired
-    private EmployeeRiskService employeeRiskService;
+    private EmployeeRiskServiceImpl employeeRiskService;
 
     /**
      * Get all the employee risk levels in the system.

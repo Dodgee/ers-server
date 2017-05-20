@@ -21,6 +21,10 @@ public class SystemController {
     @Autowired
     private SiteService siteService;
 
+    @RequestMapping(method = RequestMethod.GET, value = "/")
+    public ResponseEntity<String> alive() {
+        return new ResponseEntity<>("ERSServer", HttpStatus.OK);
+    }
 
     /**
      * Trigger an emergency at the given site.

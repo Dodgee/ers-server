@@ -9,7 +9,8 @@ import java.util.List;
 /**
  * MongoDB repository for EmployeeRiskProfile model class.
  */
-public interface EmployeeRiskLevelRepository extends MongoRepository<EmployeeRiskProfile, Integer> {
+public interface EmployeeRiskLevelRepository extends MongoRepository<EmployeeRiskProfile, String> {
 
     List<EmployeeRiskProfile> findAllByRiskLevelEquals(RiskLevel riskLevel);
+
 }

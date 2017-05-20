@@ -13,7 +13,7 @@ import uk.ac.aston.jonesja1.ers.model.Location;
 import uk.ac.aston.jonesja1.ers.model.LocationUpdate;
 import uk.ac.aston.jonesja1.ers.model.SystemState;
 import uk.ac.aston.jonesja1.ers.model.request.LocationUpdateRequest;
-import uk.ac.aston.jonesja1.ers.service.EmployeeRiskService;
+import uk.ac.aston.jonesja1.ers.service.EmployeeRiskServiceImpl;
 import uk.ac.aston.jonesja1.ers.service.employee.EmployeeService;
 import uk.ac.aston.jonesja1.ers.service.state.StateService;
 
@@ -28,7 +28,7 @@ public class EmployeeLocationUpdateController {
     Logger logger = LoggerFactory.getLogger(EmployeeLocationUpdateController.class);
 
     @Autowired
-    private EmployeeRiskService employeeRiskService;
+    private EmployeeRiskServiceImpl employeeRiskService;
 
     @Autowired
     private EmployeeService employeeService;
