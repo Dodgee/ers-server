@@ -25,7 +25,8 @@ class HighRisk extends React.Component {
     }
 
     getRiskData() {
-        axios.get('http://ers-server-dev.herokuapp.com/risk/high')
+        var serverUrl = window.location.origin;
+        axios.get(serverUrl + '/risk/high')
             .then(response => {
                 this.setState({ employeeRisks: response.data.employeeRiskProfiles });
             });

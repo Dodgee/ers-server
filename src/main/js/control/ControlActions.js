@@ -28,8 +28,8 @@ class ControlActions extends React.Component {
     }
 
     triggerEmergency(selectedSiteKey) {
-        axios.post(
-            'http://ers-server-dev.herokuapp.com/system/start/' + selectedSiteKey,
+        var serverUrl = window.location.origin;
+        axios.post(serverUrl + '/system/start/' + selectedSiteKey,
             {}
         ).then(response => {
             this.setState({showModal: false});
@@ -38,8 +38,8 @@ class ControlActions extends React.Component {
     }
 
     resolveEmergency() {
-        axios.post(
-            'http://ers-server-dev.herokuapp.com/system/stop',
+        var serverUrl = window.location.origin;
+        axios.post(serverUrl + '/system/stop',
             {}
         ).then(response => {
             this.props.onActionTriggered();

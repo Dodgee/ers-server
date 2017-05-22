@@ -29,21 +29,24 @@ class Control extends React.Component {
     }
 
     getCurrentSystemStatus() {
-        axios.get('http://ers-server-dev.herokuapp.com/system/state')
+        var serverUrl = window.location.origin;
+        axios.get(serverUrl + '/system/state')
             .then(response => {
                 this.setState({ state: response.data });
             });
     }
 
     getAvailableSystemSites() {
-        axios.get('http://ers-server-dev.herokuapp.com/system/sites')
+        var serverUrl = window.location.origin;
+        axios.get(serverUrl + '/system/sites')
             .then(response => {
                 this.setState({ sites: response.data });
             });
     }
 
     getCurrentSystemSite() {
-        axios.get('http://ers-server-dev.herokuapp.com/system/site')
+        var serverUrl = window.location.origin;
+        axios.get(serverUrl + '/system/site')
             .then(response => {
                 if (response.data.siteName && response.data.siteName !== 'undefined') {
                     this.setState({site: response.data.siteName});

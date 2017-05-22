@@ -27,7 +27,8 @@ class SendMessageModal extends React.Component {
     }
 
     sendMessage() {
-        axios.post('http://ers-server-dev.herokuapp.com/notify/employee/' + this.props.employeeId,
+        var serverUrl = window.location.origin;
+        axios.post(serverUrl + '/notify/employee/' + this.props.employeeId,
             this.state.message,
             {
                 headers: {'Content-Type': 'text/plain'}
